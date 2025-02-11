@@ -1,26 +1,36 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: "",
 			message: null,
-			demo: [
+			user: 
 				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
+					id: "",
+					email: "",
 				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
+			// Use getActions to call a function within a function
+			setToken (value){
+				setStore ( {token: value})
+			},
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
 
+			getAnimal: async (name) => {
+				try{
+					// fetching data from the backend
+					const resp = await fetch(process.env.BACKEND_URL + "/api/animal" + "?name=" + name) // llamada a buscar un animal 
+					const data = await resp.json()
+					setStore({ message: data.message })
+					// don't forget to return something, that is how the async resolves
+					return data;
+				}catch(error){
+					console.log("Error loading message from backend", error)
+				}
+			},
+		
 			getMessage: async () => {
 				try{
 					// fetching data from the backend

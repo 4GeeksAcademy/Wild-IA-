@@ -1,4 +1,4 @@
-  
+  # importar nombres de las tablas (modelos) para verlas en el panel de adm
 import os
 from flask_admin import Admin
 from .models import db, User
@@ -9,7 +9,8 @@ def setup_admin(app):
     app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
     admin = Admin(app, name='4Geeks Admin', template_mode='bootstrap3')
 
-    
+
+#CREO TABLAS Y COPIO CODIGO LINEA 15 CON NOMBRE DE MI TABLA, SOLO LAS DISPONIBILIZO     
     # Add your models here, for example this is how we add a the User model to the admin
     admin.add_view(ModelView(User, db.session))
 

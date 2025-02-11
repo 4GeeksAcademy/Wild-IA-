@@ -10,6 +10,14 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import Login from './pages/login'; // Importa el componente de login
+import Welcome from "./pages/welcome";
+import Register from "./pages/register";
+import AcercaDe from "./pages/about";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import Donar from "./pages/donar";
+import Extincion from "./pages/extincion";
+
 
 //create your first component
 const Layout = () => {
@@ -23,18 +31,28 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
                     <Routes>
-                        <Route element={<Home />} path="/" />
+                        <Route element={<Welcome />} path="/" />
+                        <Route
+                            path="/home"
+                            element={
+                                <ProtectedRoute>
+                                    <Home />
+                                </ProtectedRoute>
+                            }
+                        />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/about" element={<AcercaDe />} />
                         <Route element={<h1>Not found!</h1>} />
+                        <Route path="/donar" element={<Donar />} />
+                        <Route path="/extincion" element={<Extincion />} />
                     </Routes>
-                    <Footer />
                 </ScrollToTop>
             </BrowserRouter>
         </div>
     );
 };
-
 export default injectContext(Layout);
